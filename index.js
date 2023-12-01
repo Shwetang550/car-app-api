@@ -8,11 +8,18 @@ import authentication from "./middleware/authentication.js";
 // routes
 import cars from "./routes/cars.js";
 import dealer from "./routes/dealers.js";
+import cors from "cors"; //Setup CORS
 
 const app = express();
 
 // middleware for reading json from req-body
 app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+    allowedHeaders: "X-Requested-With, Content-Type, auth-token",
+  })
+); //Add authentication token header
 
 // custom middlewares
 app.use(logger);
